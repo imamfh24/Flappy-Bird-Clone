@@ -3047,7 +3047,7 @@ MonoBehaviour:
   pipeUp: {fileID: 2003964045}
   pipeDown: {fileID: 1319632327}
   spawnInterval: 1.5
-  holeSize: 3.5
+  defaultHoleSize: 2.5
   minOffset: -3
   maxOffset: 6
   point: {fileID: 1381545892}

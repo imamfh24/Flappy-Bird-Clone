@@ -9,7 +9,7 @@ public class PipeSpawner : MonoBehaviour
     [SerializeField] private Bird bird;
     [SerializeField] private Pipe pipeUp, pipeDown;
     [SerializeField] private float spawnInterval = 1f;
-    [SerializeField] private float holeSize = 1f;
+    [SerializeField] private float defaultHoleSize = 1f;
     [SerializeField] private float minOffset = -3f;
     [SerializeField] private float maxOffset = 6f;
     [SerializeField] private Point point;
@@ -103,7 +103,7 @@ public class PipeSpawner : MonoBehaviour
     {
         // Menempatkan posisi pipa yang telah terbentuk agar posisinya menyesuaikan dengan fungsi sin
 
-        float y = UnityEngine.Random.Range(minOffset, maxOffset);
+        float y = UnityEngine.Random.Range(minOffset, maxOffset); // Value untuk Random Posisi Pipa
         newPipeUp.transform.position += Vector3.up * y;
         newPipeDown.transform.position += Vector3.up * y;
         return y;
@@ -111,9 +111,10 @@ public class PipeSpawner : MonoBehaviour
 
     private void CreateHolePipe(Pipe newPipeUp, Pipe newPipeDown)
     {
+        var randomHoleSize = UnityEngine.Random.Range(defaultHoleSize, defaultHoleSize + 2f); // Random Hole Size
         // Menempatkan posisi dari pipa yang sudah terbentuk agar memiliki lubang ditengahnya
-        newPipeUp.transform.position += Vector3.up * (holeSize / 2);
-        newPipeDown.transform.position += Vector3.down * (holeSize / 2);
+        newPipeUp.transform.position += Vector3.up * (randomHoleSize / 2);
+        newPipeDown.transform.position += Vector3.down * (randomHoleSize / 2);
     }
 
     private void CreatePointObject(float y)
@@ -122,7 +123,7 @@ public class PipeSpawner : MonoBehaviour
         Point newPoint = Instantiate(point, transform.position, Quaternion.identity);
         newPoint.transform.parent = pipeParent.transform;
         newPoint.gameObject.SetActive(true);
-        newPoint.SetSize(holeSize * holeSize + maxOffset);
+        newPoint.SetSize(defaultHoleSize * defaultHoleSize + maxOffset);
         newPoint.transform.position += Vector3.up * y;
     }
 
